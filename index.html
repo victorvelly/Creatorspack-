@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creatorpack | Your Creator Toolkit</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f5ff;
+      color: #211b38;
+    }
+    header {
+      background: #5426a8;
+      color: white;
+      padding: 25px 20px;
+      border-radius: 0 0 24px 24px;
+    }
+    header h1 { margin: 0 0 8px; font-size: 29px; }
+    header p { line-height: 1.5; margin-bottom: 18px; }
+    .tag {
+      background: #ffffff25;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    main { padding: 20px 16px; max-width: 650px; margin: auto; }
+    h2 { font-size: 21px; }
+    .card {
+      background: white;
+      padding: 18px;
+      margin: 14px 0;
+      border-radius: 17px;
+      box-shadow: 0 4px 15px #2920440b;
+    }
+    .tools {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .tool {
+      background: white;
+      padding: 16px 12px;
+      border-radius: 15px;
+      border: 1px solid #e7dff8;
+    }
+    .emoji { font-size: 27px; }
+    label { display: block; margin: 14px 0 7px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d8cde9;
+      border-radius: 10px;
+      background: white;
+      font-size: 16px;
+    }
+    button {
+      background: #642fc0;
+      color: white;
+      border: none;
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .full { width: 100%; margin-top: 16px; }
+    .result {
+      background: #f0e9ff;
+      padding: 14px;
+      border-radius: 12px;
+      margin-top: 16px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+    .muted { color: #6f687e; line-height: 1.5; }
+    footer { text-align: center; padding: 25px; color: #777; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="tag">YOUR CREATOR TOOLKIT</span>
+    <h1>Creatorpack ✨</h1>
+    <p>Big ideas. Better content. Grow your audience.</p>
+    <button onclick="document.getElementById('studio').scrollIntoView({behavior:'smooth'})">
+      Start creating →
+    </button>
+  </header>
+
+  <main>
+    <h2>Welcome, Creator! 👋</h2>
+    <p class="muted">What will you create today? Your next great post starts here.</p>
+
+    <h2>Your creative tools</h2>
+    <div class="tools">
+      <div class="tool">
+        <div class="emoji">💡</div>
+        <b>Content Ideas</b>
+        <p class="muted">Find your next post idea.</p>
+      </div>
+      <div class="tool">
+        <div class="emoji">✍️</div>
+        <b>Caption Studio</b>
+        <p class="muted">Write engaging captions.</p>
+      </div>
+      <div class="tool">
+        <div class="emoji">#️⃣</div>
+        <b>Hashtag Helper</b>
+        <p class="muted">Discover relevant hashtags.</p>
+      </div>
+      <div class="tool">
+        <div class="emoji">📅</div>
+        <b>Post Planner</b>
+        <p class="muted">Plan your content schedule.</p>
+      </div>
+    </div>
+
+    <section class="card" id="studio">
+      <h2>🎯 Create your content</h2>
+      <p class="muted">Choose your niche and platform to get started.</p>
+
+      <label for="niche">Your content niche</label>
+      <input id="niche" placeholder="e.g. Fashion, food, business">
+
+      <label for="platform">Your platform</label>
+      <select id="platform">
+        <option>TikTok</option>
+        <option>Instagram</option>
+        <option>Facebook</option>
+        <option>YouTube</option>
+        <option>X</option>
+      </select>
+
+      <label for="goal">What do you need?</label>
+      <select id="goal">
+        <option value="ideas">Content ideas</option>
+        <option value="caption">A caption</option>
+        <option value="hashtags">Hashtags</option>
+      </select>
+
+      <button class="full" onclick="createContent()">Create for me ✨</button>
+      <div id="result" class="result" hidden aria-live="polite"></div>
+      <button id="copyBtn" class="full" onclick="copyResult()" hidden>Copy result</button>
+    </section>
+
+    <section class="card">
+      <h2>🚀 Creator tip</h2>
+      <p class="muted">Know your audience, share useful content consistently, and give people a reason to comment, save, or share your posts.</p>
+    </section>
+  </main>
+
+  <footer>Made for creators, with ❤️ · Creatorpack</footer>
+
+  <script>
+    function createContent() {
+      const niche = document.getElementById('niche').value.trim() || 'your niche';
+      const platform = document.getElementById('platform').value;
+      const goal = document.getElementById('goal').value;
+      let output = '';
+
+      if (goal === 'ideas') {
+        output = 'CONTENT IDEAS FOR ' + niche.toUpperCase() + '\n\n' +
+          '1. Three things beginners should know about ' + niche + '.\n\n' +
+          '2. Common mistakes people make with ' + niche + '.\n\n' +
+          '3. My personal experience with ' + niche + '.\n\n' +
+          '4. Five tips to improve at ' + niche + '.\n\n' +
+          '5. Answer a question your audience often asks.\n\n' +
+          'Platform: ' + platform;
+      } else if (goal === 'caption') {
+        output = 'Want to get better at ' + niche + '? ✨\n\n' +
+          'Here is something I have learned that might help you too!\n\n' +
+          'Save this post for later and share it with someone who needs it. ❤️\n\n' +
+          '#' + niche.replace(/[^a-z0-9]/gi, '') + ' #Creatorpack #ContentCreator';
+      } else {
+        const tag = niche.replace(/[^a-z0-9]/gi, '');
+        output = 'HASHTAG IDEAS\n\n#' + tag +
+          '\n#' + tag + 'Tips\n#' + tag + 'Community\n#ContentCreator\n#Creatorpack\n#' + platform.replace(/[^a-z0-9]/gi, '') +
+          '\n\nChoose hashtags relevant to your actual post.';
+      }
+
+      const box = document.getElementById('result');
+      box.textContent = output;
+      box.hidden = false;
+      document.getElementById('copyBtn').hidden = false;
+    }
+
+    async function copyResult() {
+      const text = document.getElementById('result').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        document.getElementById('copyBtn').textContent = 'Copied! ✓';
+      } catch (e) {
+        const area = document.createElement('textarea');
+        area.value = text;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        area.remove();
+        document.getElementById('copyBtn').textContent = 'Copied! ✓';
+      }
+    }
+  </script>
+</body>
+</html>

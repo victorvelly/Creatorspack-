@@ -96,22 +96,22 @@
 
     <h2>Your creative tools</h2>
     <div class="tools">
-      <div class="tool">
+      <div class="tool" onclick="openTool('ideas')" style="cursor:pointer">
         <div class="emoji">💡</div>
         <b>Content Ideas</b>
         <p class="muted">Find your next post idea.</p>
       </div>
-      <div class="tool">
+      <div class="tool" onclick="openTool('caption')" style="cursor:pointer">
         <div class="emoji">✍️</div>
         <b>Caption Studio</b>
         <p class="muted">Write engaging captions.</p>
       </div>
-      <div class="tool">
+      <div class="tool" onclick="openTool('hashtags')" style="cursor:pointer">
         <div class="emoji">#️⃣</div>
         <b>Hashtag Helper</b>
         <p class="muted">Discover relevant hashtags.</p>
       </div>
-      <div class="tool">
+      <div class="tool" onclick="openTool('planner')" style="cursor:pointer">
         <div class="emoji">📅</div>
         <b>Post Planner</b>
         <p class="muted">Plan your content schedule.</p>
@@ -138,9 +138,9 @@
       <select id="goal">
         <option value="ideas">Content ideas</option>
         <option value="caption">A caption</option>
-        <option value="hashtags">Hashtags</option>
-      </select>
-
+    <option value="hashtags">Hashtags</option>
+        <option value="planner">7-day Post Planner</option>
+    </select>
       <button class="full" onclick="createContent()">Create for me ✨</button>
       <div id="result" class="result" hidden aria-live="polite"></div>
       <button id="copyBtn" class="full" onclick="copyResult()" hidden>Copy result</button>
@@ -155,6 +155,14 @@
   <footer>Made for creators, with ❤️ · Creatorpack</footer>
 
   <script>
+    function openTool(goal) {
+  document.getElementById('goal').value = goal;
+  document.getElementById('goal').scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  });
+  createContent();
+}
     function createContent() {
       const niche = document.getElementById('niche').value.trim() || 'your niche';
       const platform = document.getElementById('platform').value;
@@ -174,7 +182,18 @@
           'Here is something I have learned that might help you too!\n\n' +
           'Save this post for later and share it with someone who needs it. ❤️\n\n' +
           '#' + niche.replace(/[^a-z0-9]/gi, '') + ' #Creatorpack #ContentCreator';
-      } else {
+      } else if (goal === 'planner') {
+  output = 'YOUR 7-DAY CONTENT PLAN FOR ' + niche.toUpperCase() + '\n\n' +
+    'DAY 1 - INTRODUCTION\nIntroduce yourself and your ' + niche + ' journey.\n\n' +
+    'DAY 2 - EDUCATION\nShare 3 useful tips about ' + niche + '.\n\n' +
+    'DAY 3 - BEHIND THE SCENES\nShow how you create or prepare your content.\n\n' +
+    'DAY 4 - COMMON MISTAKES\nExplain mistakes beginners make in ' + niche + '.\n\n' +
+    'DAY 5 - PERSONAL STORY\nShare a lesson you learned about ' + niche + '.\n\n' +
+    'DAY 6 - TREND OR CHALLENGE\nTry a relevant trend that fits your niche.\n\n' +
+    'DAY 7 - ENGAGEMENT\nAsk your audience a question about ' + niche + '.\n\n' +
+    'Platform: ' + platform;
+} else {
+        
         const tag = niche.replace(/[^a-z0-9]/gi, '');
         output = 'HASHTAG IDEAS\n\n#' + tag +
           '\n#' + tag + 'Tips\n#' + tag + 'Community\n#ContentCreator\n#Creatorpack\n#' + platform.replace(/[^a-z0-9]/gi, '') +
